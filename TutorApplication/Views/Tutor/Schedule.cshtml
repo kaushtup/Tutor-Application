@@ -1,0 +1,81 @@
+﻿@model TutorApplication.Models.ViewModel.ScheduleViewModel
+
+@{
+    ViewBag.Title = "Schedule";
+    Layout = "~/Views/Shared/_LayoutTeacher.cshtml";
+}
+
+<script src="~/Scripts/jquery-1.8.3.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<div class="row">
+
+    <div class="span9">
+
+        <div class="well">
+            <h3>Add Your Schedule</h3>
+            <hr class="soft" />
+
+            @using (Ajax.BeginForm("Schedule", "Tutor", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "result", InsertionMode = InsertionMode.Replace }))
+            {
+                @Html.ValidationSummary(true)
+
+                  
+                <table style="border: none; padding: 2px; width: 100%">
+                    <tr>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label" for="inputFname">From Time <sup>*</sup></label>
+                                <div class="controls">
+                                   
+                                    @Html.TextBoxFor(model => model.FromTime, new {@placeHolder="1:00 AM" })
+                                    @Html.ValidationMessageFor(model => model.FromTime)
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="control-group">
+                                <label class="control-label" for="inputFname">To Time <sup>*</sup></label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(model => model.ToTime,new {@placeHolder="2:00 AM" })
+                                    @Html.ValidationMessageFor(model => model.FromTime)
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                  
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="defaultBtn">Add Timing</button> 
+                       
+                    </div>
+                </div>
+             
+    
+                <div id="result" style="font-family: Verdana; color: green; font-weight: bold">
+                    @*@Html.Action("ListSchedule")*@
+                </div> 
+                
+                
+                  
+                  
+            }
+             @using (Ajax.BeginForm("ListSchedule", "Tutor", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "result", InsertionMode = InsertionMode.Replace }))
+                        {
+                        <button type="submit" class="defaultBtn">View Timing</button>
+                        }
+
+
+
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
